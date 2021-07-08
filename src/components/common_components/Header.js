@@ -22,7 +22,6 @@ function Header() {
                     <ul className="navbar-nav ml-auto">
                         <li className="nav-item">
                             <Link className="nav-link-active nav-link" to="/write_blog">Write a Blog</Link>
-                            {/* <a className="nav-link-active nav-link" href="#">Write a Blog</a> */}
                         </li>
                         <li className="nav-item">
                             <a className="nav-link" href="#">Login/Register</a>

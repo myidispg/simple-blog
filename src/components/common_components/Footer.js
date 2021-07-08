@@ -18,14 +18,14 @@ function Footer() {
             <div className="col social-links">
                 <h4 className="lets-talk">Let's Talk</h4>
                 <div>
-                    <p className="social-links">Github</p>
-                    <p className="social-links">Twitter</p>
-                    <p className="social-links">Instagram</p>
+                    <a href="https://www.github.com/myidispg" target="_blank" rel="noreferrer" className="social-links">Github</a>
+                    <a href="https://www.twitter.com/myidispg" target="_blank" rel="noreferrer" className="social-links">Twitter</a>
+                    <a href="https://www.instagram.com/myidispg" target="_blank" rel="noreferrer" className="social-links">Instagram</a>
                 </div>
             </div>
         </div>
         <p className="design-credits">Website design inspired by: <a
-            href="https://dribbble.com/shots/15238065-Blog-Personal-Website" target="_blank"><u>Dwinawan on
+            href="https://dribbble.com/shots/15238065-Blog-Personal-Website" target="_blank" rel="noreferrer"><u>Dwinawan on
                 Dribbble</u></a></p>
     </section>;
 }
