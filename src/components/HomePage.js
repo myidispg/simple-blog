@@ -1,4 +1,6 @@
 import React from "react";
+import {Link} from "react-router-dom";
+
 import Header from "./common_components/Header";
 import TheBlogHeading from "./home_page_components/TheBlogHeading"
 import MainBlog from "./home_page_components/MainBlog";
@@ -16,7 +18,7 @@ function HomePage() {
     return <div>
         <Header />
         <TheBlogHeading />
-        <MainBlog imgSrc={mainBlog.img.src} date={mainBlog.data.date} title={mainBlog.data.title} content={mainBlog.data.content} />
+        <Link to="/read_blog" style={{textDecoration: "none", color: "black"}}><MainBlog imgSrc={mainBlog.img.src} date={mainBlog.data.date} title={mainBlog.data.title} content={mainBlog.data.content} /></Link>
         <AllBlogs blogs={otherBlogs} />
         {allBlogsData.length >= 10 ? <LoadMoreButton /> : null}
         <Footer />

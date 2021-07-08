@@ -91,8 +91,10 @@ body {
 /* Large Blog View */
 
 #large-blog {
-    padding: 30px 0;
-    /* height: 400px; */
+    padding: 10px;
+    /* margin: 30px -10px; */
+    margin-top: 30px;
+    margin-bottom: 30px;
 }
 
 #large-blog img {
@@ -104,7 +106,6 @@ body {
 
 .large-blog-content {
     padding: 20px;
-    /* height: 350px; */
 }
 
 .large-blog-content>h6 {
