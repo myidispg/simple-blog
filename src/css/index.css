@@ -1,0 +1,270 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    background-color: #E3E6EC;
+    font-family: 'Poppins', sans-serif;
+    margin: 0px;
+}
+
+/* Some Global Styling */
+
+.side-space {
+    margin: auto 10%;
+}
+
+@media (max-width: 768px) {
+    .side-space {
+        margin: auto 2%;
+    }
+}
+
+/* Navbar styling */
+
+.logo {
+    border-radius: 100%;
+    background: rgb(231, 22, 93);
+    background: linear-gradient(90deg, rgba(231, 22, 93, 1) 0%, rgba(255, 103, 50, 1) 100%);
+    color: #ffffff;
+    font-size: 2rem;
+    font-weight: 500;
+    width: 50px;
+    /* height: 50px; */
+    text-align: center;
+}
+
+.navbar-container {
+    padding: 1.2%;
+}
+
+.nav-item .nav-link {
+    text-transform: uppercase;
+    letter-spacing: 0.1rem;
+    font-size: 0.8rem;
+    margin: auto 20px;
+    color: rgb(0, 0, 0, 0.5);
+}
+
+.nav-item .nav-link:hover {
+    color: black;
+}
+
+.nav-link-active {
+    color: #E7165D !important;
+    border-bottom: #E7165D solid 2px;
+    /* display: inline; */
+}
+
+@media (max-width: 1000px) {
+    .nav-item {
+        text-align: center;
+    }
+
+    .nav-item .nav-link {
+        font-size: 1.2rem;
+    }
+
+    .nav-link-active {
+        color: #E7165D !important;
+        border-bottom: none;
+    }
+}
+
+/* The Blog Heading */
+
+.super-size-heading {
+    margin: 30px 0;
+    width: 100%;
+}
+
+.heading-underline {
+    border-top: 3px solid black;
+    margin: 20px auto;
+}
+
+/* Large Blog View */
+
+#large-blog {
+    padding: 30px 0;
+    /* height: 400px; */
+}
+
+#large-blog img {
+    width: 100%;
+    height: 350px;
+    border-radius: 16px;
+    object-fit: cover;
+}
+
+.large-blog-content {
+    padding: 20px;
+    /* height: 350px; */
+}
+
+.large-blog-content>h6 {
+    opacity: 50%;
+}
+
+.large-blog-content>h2 {
+    margin: 1rem 0px;
+}
+
+.large-blog-content>p {
+    opacity: 60%;
+    margin: 1rem 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    /* number of lines to show */
+    -webkit-line-clamp: 6;
+    -webkit-box-orient: vertical;
+}
+
+/* All Blogs Section */
+
+.single-blog-column {
+    padding-bottom: 30px;
+}
+
+.left-column {
+    padding-right: 30px;
+}
+
+.center-column {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.right-column {
+    padding-left: 30px;
+}
+
+@media (max-width : 600px) {
+    .left-column, .right-column, .center-column {
+        padding: 2%;
+    }
+}
+
+.single-blog-img {
+    width: 100%;
+    border-radius: 16px;
+    object-fit: cover;
+}
+
+.small-blog-date {
+    font-size: 0.8rem;
+    opacity: 50%;
+    margin: 20px 10px 0px 10px;
+}
+
+.small-blog-heading {
+    margin: 10px 10px 8px 10px;
+    font-size: 24px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    /* number of lines to show */
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+}
+
+.small-blog-content {
+    margin: 0px 10px 16px 10px;
+    font-size: 14px;
+    opacity: 60%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: -webkit-box;
+    /* number of lines to show */
+    -webkit-line-clamp: 5;
+    -webkit-box-orient: vertical;
+}
+
+/* Load More and Back to Top Buttons */
+
+#load-more {
+    width: 150px;
+    margin: 0px auto;
+    text-shadow: 2px 2px 10px rgb(0, 0, 0, 0.3);
+}
+
+#back-to-top {
+    color: gray;
+    text-decoration: none;
+    position: relative;
+    float: right;
+    right: 40px;
+    bottom: 20px;
+    background-color: white;
+    padding: 4px 16px;
+    border-radius: 6px;
+    box-shadow: 3px 4px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* Footer */
+
+#footer {
+    background-color: black;
+    color: white;
+    padding: 2% 10%;
+    margin-top: 30px;
+}
+
+#footer img {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    float: right;
+}
+
+@media (max-width: 768px) {
+    #footer img {
+        float: none;
+    }
+}
+
+#footer .credits {
+    margin: auto 0px;
+}
+
+#footer .created-by {
+    font-size: 0.7rem;
+    margin-bottom: 0;
+    opacity: 0.7;
+}
+
+#footer .name {
+    font-size: 1rem;
+    opacity: 1;
+}
+
+#footer .social-links {
+    text-align: center;
+    margin: auto 0px;
+    padding: 0;
+}
+#footer .lets-talk {
+    font-size: 0.8rem;
+    opacity: 80%;
+    margin-bottom: 8px;
+    /* border-bottom: 1px solid white; */
+}
+
+#footer .social-links {
+    font-size: 0.9rem;
+    margin-bottom: 2px;
+}
+
+#footer .design-credits {
+    text-align: center;
+    margin-bottom: 0;
+    margin-top: 20px;
+    font-size: 0.7rem;
+    /* font-weight: lighter; */
+    opacity: 0.7;
+}
+
+#footer .design-credits a {
+    color: white;
+}
