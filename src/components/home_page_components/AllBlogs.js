@@ -1,8 +1,7 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import SingleBlog from "./SingleBlog";
 
-var _ = require('lodash');
+import {getSmallDescription, getPlaceHolderImage} from "../../utilities";
 
 function AllBlogs(props) {
 
@@ -11,10 +10,9 @@ function AllBlogs(props) {
             <div className="row">
                 {props.blogs.map((blog, index) => {
                     return (
-                        <SingleBlog key={index} imgSrc={blog.img.src} title={blog.data.title} content={blog.data.content} date={blog.data.date} />
+                        <SingleBlog key={index} imgSrc={getPlaceHolderImage(blog)} title={blog.title} content={getSmallDescription(blog)} date={blog.date} />
                     )
                 })}
-                {/* <SingleBlog /> */}
             </div>
         </div>
     </section>);

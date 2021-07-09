@@ -16,7 +16,7 @@ function ReadBlogPage() {
     var blog = false;
 
     for (var i = 0; i < allBlogsData.length; i++) {
-        if (blogHeading === _.kebabCase(allBlogsData[i].data.title)) {
+        if (blogHeading === _.kebabCase(allBlogsData[i].title)) {
             blog = allBlogsData[i];
         }
     }
@@ -24,20 +24,19 @@ function ReadBlogPage() {
     if (blog !== false) {
         return <div>
             <Header />
-            <h1 className="side-space read-blog-heading">{blog.data.title}</h1>
+            <h1 className="side-space read-blog-heading">{blog.title}</h1>
             <div className="side-space row read-blog-author-date">
                 <div className="mx-auto row">
                     <img src={placeholder} alt="icon of guy working on laptop" className="author-image" />
                     <div className="author-date-column">
-                        <p className="author-name">by {blog.data.author}</p>
-                        <p className="author-date">{blog.data.date}</p>
+                        <p className="author-name">by {blog.author}</p>
+                        <p className="author-date">{blog.date}</p>
                     </div>
                 </div>
             </div>
             <hr className="side-space read-blog-divider" />
-            {/* <p className="side-space read-blog-content">{blog.data.content}</p> */}
             <div className="read-blog-content-container">
-                {blog.data.contentArray.map((element, index) => {
+                {blog.contentArray.map((element, index) => {
                     if (typeof element === "string") {
                         return <p key={index} className="side-space read-blog-paragraph">{element}</p>
                     } else {
