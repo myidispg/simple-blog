@@ -123,7 +123,7 @@ body {
     text-overflow: ellipsis;
     display: -webkit-box;
     /* number of lines to show */
-    -webkit-line-clamp: 6;
+    -webkit-line-clamp: 8;
     -webkit-box-orient: vertical;
 }
 
@@ -192,7 +192,8 @@ body {
 #load-more {
     width: 150px;
     margin: 0px auto;
-    text-shadow: 2px 2px 10px rgb(0, 0, 0, 0.3);
+    /* text-shadow: 2px 2px 10px rgb(0, 0, 0, 0.3); */
+    text-shadow: 11px 23px 50px rgb(0 0 0 / 15%);
 }
 
 #back-to-top {
@@ -276,4 +277,120 @@ body {
 
 #footer .design-credits a {
     color: white;
+}
+
+
+/* READ A BLOG PAGE */
+.read-blog-heading {
+    font-size: 4.5rem;
+    text-align: center;
+    margin-bottom: 30px;
+    margin-top: 30px;
+}
+
+.read-blog-author-date {
+    padding: auto;
+    margin-bottom: 30px;
+}
+
+@media screen and (max-width: 900px) {
+    .read-blog-heading {
+        font-size: 3rem;
+        margin-bottom: 20px;
+    }
+    .read-blog-author-date {
+        margin-bottom: 20px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .read-blog-heading {
+        font-size: 2rem;
+        margin-bottom: 15px;
+    }
+
+    .read-blog-author-date {
+        margin-bottom: 15px;
+    }
+}
+
+.read-blog-author-date p {
+    margin-bottom: 0px;
+}
+
+.author-image {
+    border-radius: 50%;
+    height: 70px;
+    border: 2px solid rgb(0, 0, 0, 0.4);
+}
+
+.author-date-column {
+    margin: auto 10px;
+}
+
+.author-date {
+    text-transform: uppercase;
+    color:rgb(0, 0, 0, 0.4);
+    font-weight: 500;
+}
+
+.read-blog-divider {
+    border-top: 1px solid rgb(0, 0, 0, 0.6);
+    margin-bottom: 2%;
+}
+
+.read-blog-content-container {
+    padding: 2%;
+}
+
+.read-blog-paragraph {
+    padding-top: 1%;
+    font-size: 1.2rem;
+}
+
+.read-blog-subheading {
+    padding-bottom: 1%;
+    padding-top: 2%;
+    font-size: 2.2rem;
+}
+
+.read-blog-img {
+    border-radius: 8px;
+    width: 75vw;
+    height: auto;
+    min-height: 30vh;
+    margin: auto;
+    margin-bottom: 3%;
+}
+
+@media screen and (max-width: 900px) {
+    .read-blog-paragraph {
+        padding-top: 1.5%;
+        font-size: 1rem;
+    }
+    
+    .read-blog-subheading {
+        padding-bottom: 1%;
+        padding-top: 2.5%;
+        font-size: 2rem;
+    }
+    
+}
+
+@media screen and (max-width: 800px) {
+    .read-blog-paragraph {
+        padding-top: 1.5%;
+        font-size: 0.9rem;
+    }
+    
+    .read-blog-subheading {
+        padding-bottom: 1.5%;
+        padding-top: 2.5%;
+        font-size: 1.8rem;
+    }
+
+    .read-blog-img {
+        width: 90vw;
+    }
+    
 }

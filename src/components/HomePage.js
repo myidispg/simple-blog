@@ -15,7 +15,7 @@ var _ = require('lodash');
 function HomePage() {
     
     let mainBlog = allBlogsData[0];
-    let otherBlogs = allBlogsData.filter((value, index) => index !== 1);
+    let otherBlogs = allBlogsData.filter((value, index) => index !== 0);
 
     return <div>
         <Header />
