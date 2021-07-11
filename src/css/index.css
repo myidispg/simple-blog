@@ -10,6 +10,12 @@ body {
 
 /* Some Global Styling */
 
+#root {
+    position: relative;
+    min-height: 100vh;
+    padding-bottom: 11rem;
+}
+
 .side-space {
     margin: auto 10%;
 }
@@ -190,7 +196,7 @@ body {
 
 #load-more {
     width: 150px;
-    margin: 0px auto;
+    margin: 0px auto 20px auto;
     /* text-shadow: 2px 2px 10px rgb(0, 0, 0, 0.3); */
     text-shadow: 11px 23px 50px rgb(0 0 0 / 15%);
 }
@@ -211,10 +217,15 @@ body {
 /* Footer */
 
 #footer {
+    width: 100%;
     background-color: black;
     color: white;
     padding: 2% 10%;
     margin-top: 30px;
+    position: absolute;
+    bottom: 0;
+    height: 11rem;
+    /* bottom: 0; */
 }
 
 #footer img {
@@ -390,6 +401,20 @@ body {
 }
 
 /* Write a blog styles */
+.expanding-text-area {
+    overflow: hidden;
+    resize: none;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+}
+
+.blog-page-author-date {
+    margin-bottom: 30px;
+}
 
 .write-blog-heading {
     font-size: 4rem;
@@ -397,23 +422,17 @@ body {
     text-align: center;
     margin-bottom: 30px;
     margin-top: 30px;
-    background-color: transparent;
-    border: none;
-    outline: none;
-    -webkit-box-shadow: none;
-    -moz-box-shadow: none;
-    box-shadow: none;
-    /* margin: 30px auto; */
 }
 
-.write-blog-heading::placeholder {
+.write-blog-heading::placeholder .write-blog-paragraph::placeholder{
     color: grey;
     opacity: 60%;
 }
 
-.blog-page-author-date {
-    padding: auto;
-    margin-bottom: 30px;
+.write-blog-paragraph {
+    font-size: 1.2rem;
+    width: 75%;
+    margin: 30px 0 0 0;
 }
 
 @media screen and (max-width: 900px) {
@@ -424,8 +443,13 @@ body {
     .blog-page-author-date {
         margin-bottom: 20px;
     }
-}
 
+    .write-blog-paragraph {
+        font-size: 1rem;
+        margin-bottom: 20px;
+    }
+    
+}
 @media screen and (max-width: 700px) {
     .write-blog-heading {
         font-size: 2rem;
@@ -434,4 +458,10 @@ body {
     .blog-page-author-date {
         margin-bottom: 15px;
     }
+
+    .write-blog-paragraph {
+        font-size: 1rem;
+        margin-bottom: 15px;
+    }
 }
+

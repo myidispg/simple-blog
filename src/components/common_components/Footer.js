@@ -1,7 +1,7 @@
 import React from "react";
 
 function Footer() {
-    return <section id="footer">
+    return <footer id="footer">
         <div className="row">
             <div className="col">
                 <div className="row">
@@ -25,8 +25,11 @@ function Footer() {
             </div>
         </div>
         <p className="design-credits">Website design inspired by: <a
-            href="https://dribbble.com/shots/15238065-Blog-Personal-Website" target="_blank" rel="noreferrer"><u>Dwinawan on
-                Dribbble</u></a></p>
-    </section>;
+            href="https://dribbble.com/shots/15238065-Blog-Personal-Website" target="_blank" rel="noreferrer">
+            <u>Dwinawan on Dribbble
+            </u>
+        </a>
+        </p>
+    </footer>;
 }
 export default Footer;
