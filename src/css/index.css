@@ -465,3 +465,16 @@ body {
     }
 }
 
+.plus-icon-add-para {
+    margin-top: 20px;
+    width: 32px;
+    height: 32px;
+    margin-bottom: 50px;
+    fill: grey;
+    opacity: 0.8;
+}
+
+.plus-icon-add-para:hover {
+    fill: black;
+    opacity: 0.5;
+}

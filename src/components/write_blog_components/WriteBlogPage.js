@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Header from "../common_components/Header";
 import Footer from "../common_components/Footer";
 import placeholder from "../../react-assets/profile-placeholder.png"
@@ -12,20 +12,41 @@ function WriteBlogPage() {
         date: `${today.toLocaleString('default', { month: "long" })} ${today.getDate()}, ${today.getFullYear()}`,
         author: "Prashant Goyal",
         title: "",
-        contentArray: ["Hello", "My", "Name", "Is", "John", "Doe"]
+        // contentArray: [""]
+        contentArray: [
+            `Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`,
+            `Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+
+            The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.`,
+            `It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like).`,
+            `There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum, you need to be sure there isn't anything embarrassing hidden in the middle of text. All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words, combined with a handful of model sentence structures, to generate Lorem Ipsum which looks reasonable. The generated Lorem Ipsum is therefore always free from repetition, injected humour, or non-characteristic words etc.`]
     });
 
-    async function handleInput(event) {
+    useEffect(() => {
+        // console.log(document.querySelector("#blog-content-para"));
+        // console.log(document.getElementsByName("blog-content-para-1")[0])
+        blogContent.contentArray.map((element, index) => {
+            let domElement = document.getElementsByName(`blog-content-para-${index}`)[0]
+            domElement.style.height = ""
+            domElement.style.height = domElement.scrollHeight + "px"
+            console.log(domElement)
+        })
+    })
+
+    function setHeight(event) {
         // Expand height of a text area based on the input
         let textArea = event.target;
         textArea.style.height = ""
         textArea.style.height = textArea.scrollHeight + "px";
+    }
+
+
+    function handleInput(event) {
+
+        setHeight(event);
 
         const targetName = event.target.name;
         const targetValue = event.target.value;
-
-        console.log(targetName);
-        console.log(targetValue);
 
         if (targetName === "blog-title") {
             setBlogContent(prevValue => {
@@ -36,21 +57,44 @@ function WriteBlogPage() {
             });
         } else if (targetName.includes("blog-content-para")) {
             let indexOfContent = targetName.split("-")[3];
-            let newContentArray = blogContent.contentArray;
 
-            if(indexOfContent === undefined){
-                newContentArray.push(targetValue);
-            }else{
-                newContentArray[indexOfContent] = targetValue;
-            }
             setBlogContent(prevValue => {
+                prevValue.contentArray[indexOfContent] = targetValue
                 return {
                     ...prevValue,
-                    contentArray: newContentArray
                 }
             })
         }
-        console.log(blogContent);
+    }
+
+    function handleKeyPress(event) {
+
+        if (blogContent.contentArray.length === 1 && blogContent.contentArray[0] === "") {
+            // No need to do anything. User has not typed anything.
+            if (event.shiftKey || event.key === "Enter") {
+                event.preventDefault();
+            }
+            console.log("Empty blog");
+            return;
+        } else {
+            // Blog has some content. So, just find out in which para was the keys pressed and add a new para after it.
+            if (event.shiftKey && event.key === "Enter") {
+                event.preventDefault();
+                setBlogContent((prevValue) => {
+                    let indexOfContent = parseInt(event.target.name.split("-")[3]) + 1;
+                    let newContentArray = [...prevValue.contentArray.slice(0, indexOfContent), "", ...prevValue.contentArray.slice(indexOfContent)]
+
+                    return {
+                        ...prevValue,
+                        contentArray: newContentArray
+                    }
+                });
+            }
+        }
+    }
+
+    function addNewPara() {
+        setBlogContent({ ...blogContent, contentArray: [...blogContent.contentArray, ""] });
     }
 
     return <div>
@@ -72,14 +116,26 @@ function WriteBlogPage() {
                 </div>
                 <hr className="side-space read-blog-divider" />
                 {/* The blog content */}
-                <div className="row" style={{ marginBottom: "50px" }}>
-                    {blogContent.contentArray.map((element, index) => {
-                        return <textarea key={index} value={element} rows="1" type="text" id="blog-content-para" name={`blog-content-para-${index}`} className="mx-auto expanding-text-area write-blog-paragraph" onInput={handleInput}>
-                            {element}
-                        </textarea>
-                    })}
-                    <textarea rows="1" type="text" placeholder="Start writing here" id="blog-content-para" name="blog-content-para" className="mx-auto expanding-text-area write-blog-paragraph" onInput={handleInput} />
+                <div className="row">
+                    {
+                        blogContent.contentArray.map((element, index) => {
+                            return <textarea key={index} value={element} type="text" placeholder="New para here" id="blog-content-para" name={`blog-content-para-${index}`} className="mx-auto expanding-text-area write-blog-paragraph" onInput={handleInput} onKeyDown={handleKeyPress} onLoad={setHeight} />;
+                            {/* return element === "" ?
+                                <textarea key={index} value={element} rows="1" type="text" placeholder="New para here" id="blog-content-para" name={`blog-content-para-${index}`} className="mx-auto expanding-text-area write-blog-paragraph" onInput={handleInput} onKeyDown={handleKeyPress}>{element} </textarea>
+                                : <textarea key={index} value={element} rows="1" type="text" id="blog-content-para" name={`blog-content-para-${index}`} className="mx-auto expanding-text-area write-blog-paragraph" onInput={handleInput} onKeyDown={handleKeyPress} /> */}
+                        })
+                    }
                 </div>
+                <div className="container-fluid">
+                    <div className="row">
+                        <svg xmlns="http://www.w3.org/2000/svg" className="mx-auto bi bi-plus-square plus-icon-add-para" viewBox="0 0 16 16" onClick={addNewPara}>
+                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                        </svg>
+                    </div>
+                    <p className="side-space">Shift + ↵ to write in a new line. ↵ for a new paragraph.</p>
+                </div>
+
             </form>
         </div>
         <Footer />
