@@ -15,11 +15,17 @@ var _ = require('lodash');
 
 function HomePage() {
 
+    let headerLinks = [
+        { displayName: "Write A Blog", link: "/write_blog", isActive: true },
+        { displayName: "Login/Register", link: "/", isActive: false },
+        { displayName: "About Me", link: "#footer", isActive: false }
+    ]
+
     let mainBlog = allBlogsData[0];
     let otherBlogs = allBlogsData.filter((value, index) => index !== 0);
 
     return <div>
-        <Header />
+        <Header headerLinks={headerLinks}/>
         <TheBlogHeading />
         <Link to={`/read_blog/${_.kebabCase(mainBlog.title)}`} style={{ textDecoration: "none", color: "black" }}>
             <MainBlog imgSrc={getPlaceHolderImage(mainBlog)} date={mainBlog.date} title={mainBlog.title} content={getSmallDescription(allBlogsData[0])} />

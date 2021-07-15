@@ -1,9 +1,16 @@
 import React, { useEffect, useState } from "react";
+import { isMobile } from 'react-device-detect';
 import Header from "../common_components/Header";
 import Footer from "../common_components/Footer";
 import placeholder from "../../react-assets/profile-placeholder.png"
 
 function WriteBlogPage() {
+
+    let headerLinks = [
+        { displayName: "Publish", link: "/", isActive: true },
+        { displayName: "Login/Register", link: "/", isActive: false },
+        { displayName: "About Me", link: "#footer", isActive: false }
+    ]
 
     let today = new Date();
 
@@ -25,9 +32,7 @@ function WriteBlogPage() {
     });
 
     useEffect(() => {
-        // console.log(document.querySelector("#blog-content-para"));
-        // console.log(document.getElementsByName("blog-content-para-1")[0])
-        blogContent.contentArray.map((element, index) => {
+        blogContent.contentArray.map(function (element, index) {
             let domElement = document.getElementsByName(`blog-content-para-${index}`)[0]
             domElement.style.height = ""
             domElement.style.height = domElement.scrollHeight + "px"
@@ -43,8 +48,6 @@ function WriteBlogPage() {
 
 
     function handleInput(event) {
-
-        // console.log(event);
 
         const targetName = event.target.name;
         const targetValue = event.target.value;
@@ -90,12 +93,13 @@ function WriteBlogPage() {
                         contentArray: newContentArray
                     }
                 });
+                return;
             }
 
             // If the backspace key is pressed on an empty paragraph and the paragraph is not at the top, remove the paragraph.
             if (event.key === "Backspace") {
                 let indexOfContent = parseInt(event.target.name.split("-")[3]);
-                if(blogContent.contentArray[indexOfContent] === ""){
+                if (blogContent.contentArray[indexOfContent] === "") {
                     event.preventDefault();
                     let newArray = blogContent.contentArray;
                     newArray.splice(indexOfContent, 1)
@@ -105,7 +109,7 @@ function WriteBlogPage() {
                     })
 
                 }
-
+                return;
             }
         }
     }
@@ -115,7 +119,7 @@ function WriteBlogPage() {
     }
 
     return <div>
-        <Header />
+        <Header headerLinks={headerLinks} />
         <div className="container-fluid">
             <form>
                 <div className="row">
@@ -141,13 +145,18 @@ function WriteBlogPage() {
                     }
                 </div>
                 <div className="container-fluid">
-                    <div className="row">
-                        <svg xmlns="http://www.w3.org/2000/svg" className="mx-auto bi bi-plus-square plus-icon-add-para" viewBox="0 0 16 16" onClick={addNewPara}>
-                            <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
-                            <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
-                        </svg>
+                    <div className="row new-content-row">
+                        <div className="mx-auto">
+                            <svg xmlns="http://www.w3.org/2000/svg" className="bi bi-plus-square plus-icon-add-para" viewBox="0 0 16 16" onClick={addNewPara}>
+                                <path d="M8 15A7 7 0 1 1 8 1a7 7 0 0 1 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z" />
+                                <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z" />
+                            </svg>
+                            {
+                                isMobile ? null : <span className="input-hint">Shift + ↵ to write in a new paragraph. ↵ for a new line.</span>
+                            }
+
+                        </div>
                     </div>
-                    <p className="side-space">Shift + ↵ to write in a new line. ↵ for a new paragraph.</p>
                 </div>
 
             </form>

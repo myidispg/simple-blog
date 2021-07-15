@@ -11,6 +11,12 @@ var _ = require('lodash');
 
 function ReadBlogPage() {
 
+    let headerLinks = [
+        { displayName: "Write A Blog", link: "/write_blog", isActive: true },
+        { displayName: "Login/Register", link: "/", isActive: false },
+        { displayName: "About Me", link: "#footer", isActive: false }
+    ]
+
     let blogHeading = useParams().blogHeading;
 
     var blog = false;
@@ -23,7 +29,7 @@ function ReadBlogPage() {
 
     if (blog !== false) {
         return <div>
-            <Header />
+            <Header headerLinks={headerLinks} />
             <h1 className="side-space read-blog-heading">{blog.title}</h1>
             <div className="side-space row read-blog-author-date">
                 <div className="mx-auto row">

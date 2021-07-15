@@ -27,16 +27,6 @@ function getPlaceHolderImage(blog) {
     // There is no image in the blog. Just add a placeholder.
     let placeholderIndex = Math.floor(Math.random() * 7 + 1);
     return `./assets/placeholder_${placeholderIndex}.jpg`
-
-    // blog.contentArray.forEach(element => {
-    //     if(typeof element !== "string"){
-    //         if(element.type === "image"){
-    //             img = element.content;
-    //         }
-    //     }
-    // })
-    
-    // return Math.floor(Math.random() * 7 + 1);
 }
 
 export {getSmallDescription, getPlaceHolderImage};
