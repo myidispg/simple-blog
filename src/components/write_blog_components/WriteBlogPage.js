@@ -3,7 +3,6 @@ import { isMobile } from 'react-device-detect';
 import Header from "../common_components/Header";
 import Footer from "../common_components/Footer";
 import placeholder from "../../react-assets/profile-placeholder.png"
-import { set } from "lodash";
 
 function WriteBlogPage() {
 
@@ -45,8 +44,6 @@ function WriteBlogPage() {
                 domElement = document.getElementsByName(`blog-content-heading-${index}`)[0]
             }
             setHeight(domElement);
-            // domElement.style.height = ""
-            // domElement.style.height = domElement.scrollHeight + "px"
         })
     })
 
@@ -78,7 +75,7 @@ function WriteBlogPage() {
                     ...prevValue,
                 }
             })
-        } else if(targetName.includes("blog-content-heading")){
+        } else if (targetName.includes("blog-content-heading")) {
             let indexOfContent = targetName.split("-")[3];
             setBlogContent(prevValue => {
                 prevValue.contentArray[indexOfContent].content = targetValue;
@@ -117,7 +114,8 @@ function WriteBlogPage() {
             // If the backspace key is pressed on an empty paragraph and the paragraph is not at the top, remove the paragraph.
             if (event.key === "Backspace") {
                 let indexOfContent = parseInt(event.target.name.split("-")[3]);
-                if (blogContent.contentArray[indexOfContent] === "") {
+                // Make sure that paragraphs and subheading is empty before removing that textarea.
+                if (blogContent.contentArray[indexOfContent] === "" || blogContent.contentArray[indexOfContent].content === "") {
                     event.preventDefault();
                     let newArray = blogContent.contentArray;
                     newArray.splice(indexOfContent, 1)
@@ -157,16 +155,21 @@ function WriteBlogPage() {
     function showTitleImageButtons(event) {
         console.log(event.target.name);
         let indexOfContent = parseInt(event.target.name.split("-")[3]);
-        let addTitleButtonDom = document.getElementsByName(`add-title-para-${indexOfContent}`);
-        let addImageButtonDom = document.getElementsByName(`add-image-para-${indexOfContent}`);
 
-        // console.log(indexOfContent);
-        // console.log(addTitleButtonDom);
-        // console.log(addImageButtonDom);
+        // Show the title and image buttons only when the textarea is empty
+        if (blogContent.contentArray[indexOfContent] === "" || blogContent.contentArray[indexOfContent].content === "") {
+            
+            let addTitleButtonDom = document.getElementsByName(`add-title-para-${indexOfContent}`);
+            let addImageButtonDom = document.getElementsByName(`add-image-para-${indexOfContent}`);
 
-        // This returns a nodelist and the first element is the HTML Dom element
-        addTitleButtonDom[0].style.visibility = "visible"
-        addImageButtonDom[0].style.visibility = "visible"
+            // console.log(indexOfContent);
+            // console.log(addTitleButtonDom);
+            // console.log(addImageButtonDom);
+
+            // This returns a nodelist and the first element is the HTML Dom element
+            addTitleButtonDom[0].style.visibility = "visible"
+            addImageButtonDom[0].style.visibility = "visible"
+        }
     }
 
     function hideTitleImageButtons(event) {
@@ -237,9 +240,7 @@ function WriteBlogPage() {
                                     <textarea rows="1" value={element.content} type="text" placeholder="Type a subheading" id="blog-content-para" name={`blog-content-heading-${index}`} className="mx-auto expanding-text-area write-blog-subheading" onInput={handleInput} onKeyDown={handleKeyPress} onFocus={showTitleImageButtons} onBlur={hideTitleImageButtons} />
                                 </div>
                             }
-
                             return htmlElement;
-
                         })
                     }
                 </div>
