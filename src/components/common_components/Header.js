@@ -3,8 +3,6 @@ import { Link } from "react-router-dom";
 
 function Header(props) {
 
-    console.log(props.headerLinks)
-
     const [isNavOpen, setNavOpen] = useState(false);
 
     function toggleNav() {
