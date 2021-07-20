@@ -250,6 +250,10 @@ for (var i = 1; i < 14; i++) {
         title: title,
         // content: "Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages.",
         contentArray: [
+            {
+                type: "image",
+                content: "https://miro.medium.com/max/3000/1*5hmMGBO63M5jFYYjqlqwaQ.jpeg"
+            },
             "You turn in your first assignment (logging half the hours you actually spent) and make yourself sick waiting for feedback. One minute you’re sure your banner design should win an award. The next you think you might get fired. Your director sends revisions, and lots of them. You basically need to redesign from scratch. You’re crushed, but at least you have a job! You make the changes and realize your work is much better.",
             "And so it goes, day after day and task after task. You admire your mentors and soak up every bit of advice they can give you. Soon, you’re no longer the beginner. You’ve been working and learning for years. Everything new has become routine.",
             "Which is where many of us find ourselves now.",
