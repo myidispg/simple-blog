@@ -25,7 +25,7 @@ function HomePage() {
     let otherBlogs = allBlogsData.filter((value, index) => index !== 0);
 
     return <div>
-        <Header headerLinks={headerLinks}/>
+        <Header headerLinks={headerLinks} />
         <TheBlogHeading />
         <Link to={`/read_blog/${_.kebabCase(mainBlog.title)}`} style={{ textDecoration: "none", color: "black" }}>
             <MainBlog imgSrc={getPlaceHolderImage(mainBlog)} date={mainBlog.date} title={mainBlog.title} content={getSmallDescription(allBlogsData[0])} />
