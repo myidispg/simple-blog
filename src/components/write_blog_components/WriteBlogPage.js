@@ -36,8 +36,6 @@ function WriteBlogPage() {
         // ]
     });
 
-    const [apiMessage, setAPIMessage] = useState("");
-
     useEffect(() => {
 
         setHeight(document.getElementById("blog-title"));
@@ -52,28 +50,8 @@ function WriteBlogPage() {
                 setHeight(domElement);
             }
         })
-
-        callBackendAPI().then(res => {
-            console.log(`before: ${res}`)
-            setAPIMessage(res)
-        }).catch(err => { console.log(err); })
     })
 
-    async function callBackendAPI() {
-        let response = await fetch("/api/express_backend", {
-            method: "GET",
-            headers: {
-                "Content-Type": "application/json"
-            }
-        });
-        const body = await response.json();
-        if (response.status === 200) {
-            return body.message;
-        } else {
-            throw Error(body.message);
-        }
-
-    }
 
     function setHeight(domElement) {
         // Expand height of a text area based on the input
@@ -257,7 +235,7 @@ function WriteBlogPage() {
 
     return <div>
         <Header headerLinks={headerLinks} />
-        <p>{apiMessage}</p>
+        {/* <p>{apiMessage}</p> */}
         <div className="container-fluid">
             <form>
                 <div className="row">
