@@ -6,5 +6,5 @@ app.listen(port, () => { console.log(`Listening on port ${port}`); });
 
 app.get('/api/express_backend', (req, res) => {
     console.log(`Got a hit. Req: ${req}`);
-    res.send({ message: "Hello World" });
+    res.send({ message: "Welcome to express" });
 });
