@@ -257,7 +257,7 @@ function WriteBlogPage() {
 
     return <div>
         <Header headerLinks={headerLinks} />
-        <p>{apiMessage}</p>
+        {/* <p>{apiMessage}</p> */}
         <div className="container-fluid">
             <form>
                 <div className="row">
