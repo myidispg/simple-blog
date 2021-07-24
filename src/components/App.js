@@ -10,7 +10,7 @@ function App() {
         <Switch>
             <Route path="/read_blog/:blogHeading"><ReadBlogPage /></Route>
             <Route path="/write_blog"><WriteBlogPage /></Route>
-            <Route path="/"><HomePage /></Route>
+            <Route exact path="/"><HomePage /></Route>
         </Switch>
     </Router>;
 }

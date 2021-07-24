@@ -1,13 +1,9 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useParams, Redirect } from "react-router-dom";
 
 import Header from "../common_components/Header";
 import Footer from "../common_components/Footer";
 import placeholder from "../../react-assets/profile-placeholder.png"
-
-import allBlogsData from "../../all_blogs";
-
-var _ = require('lodash');
 
 function ReadBlogPage() {
 
@@ -19,15 +15,36 @@ function ReadBlogPage() {
 
     let blogHeading = useParams().blogHeading;
 
-    var blog = false;
+    const [blog, setBlog] = useState({
+        date: "",
+        author: "",
+        title: "",
+        contentArray: []
+    });
+    const [redirectToHome, setRedirectToHome] = useState(false);
 
-    for (var i = 0; i < allBlogsData.length; i++) {
-        if (blogHeading === _.kebabCase(allBlogsData[i].title)) {
-            blog = allBlogsData[i];
+    useEffect(() => {
+        getBlogData(blogHeading).then(data => {
+            setBlog(data);
+        }).catch((err) => { console.log(err); });
+    }, []);
+
+    async function getBlogData(blogHeading) {
+        let response = await fetch(`/api/blog/${blogHeading}`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        });
+        const body = await response.json();
+        if (response.status !== 200) {
+            setRedirectToHome(true);
+        } else {
+            return body;
         }
     }
 
-    if (blog !== false) {
+    if (!redirectToHome) {
         return <div>
             <Header headerLinks={headerLinks} />
             <h1 className="side-space read-blog-heading">{blog.title}</h1>

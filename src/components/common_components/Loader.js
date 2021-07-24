@@ -1,8 +1,8 @@
 import React from "react";
 
 function Loader() {
-    return <div class="loader-container">
-        <div class="loader"></div>
+    return <div className="loader-container">
+        <div className="loader"></div>
     </div>
 }
 
