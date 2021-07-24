@@ -8,7 +8,7 @@ for (var i = 1; i < 14; i++) {
     if (i === 1) {
         title += "Beginners know something experts don't"
     } else {
-        title += "Lorem Ipsum is simply dummy text of the printing and typesetting industry."
+        title += `Lorem Ipsum is simply dummy text of the printing and typesetting industry. ${i}`
     }
 
     allBlogsData.push(i % 2 === 0 ? {

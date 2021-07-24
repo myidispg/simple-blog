@@ -27,7 +27,6 @@ function HomePage() {
 
     useEffect(() => {
         getAllBlogs().then(data => {
-            console.log(`Got the following response: ${data}`);
             setAllBlogs(data);
             setTimeout(() => {
                 setIsLoading(false);
