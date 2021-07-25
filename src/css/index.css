@@ -46,7 +46,7 @@ body {
 }
 
 .navbar-container {
-    padding: 1.2%;
+    padding: 1.2% 4% 1.2% 1.2%;
 }
 
 .nav-item .nav-link {
