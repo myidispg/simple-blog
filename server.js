@@ -1,13 +1,18 @@
 // import allBlogsData from "./src/all_blogs";
 
 const express = require('express');
+const bodyParser = require("body-parser");
+
 const app = express();
 
 var _ = require('lodash');
 
 app.set('view engine', 'ejs');
 
-// app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.json({limit: '50mb'}));
+// parse application/json
+app.use(bodyParser.json())
 app.use(express.static("public"));
 
 const port = process.env.PORT || 5000;
@@ -30,6 +35,12 @@ app.get('/api/blog/:heading', (req, res) => {
         }
     }
     blog !== undefined ? res.send(blog) : res.sendStatus(404);
+});
+
+app.post('/api/blog/new', (req, res) => {
+    let blog = req.body;
+    allBlogsData.allBlogsData.push(blog);
+    res.status(201).send({message: "blog created"});
 });
 
 app.get('/api/express_backend', (req, res) => {

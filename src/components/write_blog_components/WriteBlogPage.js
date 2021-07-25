@@ -3,14 +3,9 @@ import { isMobile } from 'react-device-detect';
 import Header from "../common_components/Header";
 import Footer from "../common_components/Footer";
 import placeholder from "../../react-assets/profile-placeholder.png"
+import { Redirect } from "react-router-dom";
 
 function WriteBlogPage() {
-
-    let headerLinks = [
-        { displayName: "Publish", link: "/", isActive: true },
-        { displayName: "Login/Register", link: "/", isActive: false },
-        { displayName: "About Me", link: "#footer", isActive: false }
-    ]
 
     let today = new Date();
 
@@ -36,22 +31,72 @@ function WriteBlogPage() {
         // ]
     });
 
+    const [redirectToHome, setRedirectToHome] = useState(false);
+    const [headerLinks, setHeaderLinks] = useState(
+        [
+            { displayName: "Publish", link: "/write_blog", isActive: true, onClick: publishButtonOnClick },
+            // { displayName: "Login/Register", link: "/", isActive: false },
+            // { displayName: "About Me", link: "#footer", isActive: false }
+        ]
+    );
+
     useEffect(() => {
 
-        setHeight(document.getElementById("blog-title"));
+        console.log(`Redirect to home: ${redirectToHome}`);
 
-        blogContent.contentArray.forEach(function (element, index) {
-            let domElement = undefined;
-            if (typeof element === "string") {
-                domElement = document.getElementsByName(`blog-content-para-${index}`)[0]
-                setHeight(domElement);
-            } else if (element.constructor === Object && element.type === "heading") {
-                domElement = document.getElementsByName(`blog-content-heading-${index}`)[0]
-                setHeight(domElement);
-            }
-        })
+        if (!redirectToHome) {
+            setHeight(document.getElementById("blog-title"));
+            blogContent.contentArray.forEach(function (element, index) {
+                let domElement = undefined;
+                if (typeof element === "string") {
+                    domElement = document.getElementsByName(`blog-content-para-${index}`)[0]
+                    setHeight(domElement);
+                } else if (element.constructor === Object && element.type === "heading") {
+                    domElement = document.getElementsByName(`blog-content-heading-${index}`)[0]
+                    setHeight(domElement);
+                }
+            })
+        }
     })
 
+    function publishButtonOnClick(event) {
+        console.log(event);
+        setHeaderLinks([
+            { displayName: "Saving", link: "", isActive: true, onClick: () => { } },
+        ]);
+        postBlogToAPI().then((data) => {
+            console.log("Successfully posted blog to API");
+            setRedirectToHome(true);
+        }).catch((error) => {
+            console.log("Error posting blog to API");
+            console.log(error);
+            setHeaderLinks([
+                { displayName: "Error while saving the blog.", link: "", isActive: true, onClick: () => { } },
+            ]);
+            // Set to normal after 2 seconds
+            setTimeout(() => {
+                setHeaderLinks([
+                    { displayName: "Publish", link: "write_blog", isActive: true, onClick: publishButtonOnClick },
+                ]);
+            }, 2000);
+
+        });
+    }
+
+    async function postBlogToAPI() {
+        let response = await fetch('/api/blog/new', {
+            method: "POST",
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(blogContent)
+        });
+        const body = await response.json();
+        console.log(response);
+        if (response.status === 201) {
+            return body;
+        } else {
+            throw new Error(body.message);
+        }
+    }
 
     function setHeight(domElement) {
         // Expand height of a text area based on the input
@@ -233,7 +278,7 @@ function WriteBlogPage() {
         }
     }
 
-    return <div>
+    return redirectToHome ? <Redirect to="/" /> : <div>
         <Header headerLinks={headerLinks} />
         {/* <p>{apiMessage}</p> */}
         <div className="container-fluid">

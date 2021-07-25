@@ -9,8 +9,8 @@ function ReadBlogPage() {
 
     let headerLinks = [
         { displayName: "Write A Blog", link: "/write_blog", isActive: true },
-        { displayName: "Login/Register", link: "/", isActive: false },
-        { displayName: "About Me", link: "#footer", isActive: false }
+        // { displayName: "Login/Register", link: "/", isActive: false },
+        // { displayName: "About Me", link: "#footer", isActive: false }
     ]
 
     let blogHeading = useParams().blogHeading;

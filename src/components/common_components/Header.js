@@ -26,8 +26,8 @@ function Header(props) {
                                 return <li key={index} className="nav-item">
                                     {
                                         element.link[0] === "#" ?
-                                            <a className={`nav-link ${element.isActive ? "nav-link-active" : ""}`} href={element.link}>{element.displayName}</a> :
-                                            <Link className={`nav-link ${element.isActive ? "nav-link-active" : ""}`} to={element.link}>{element.displayName}</Link>
+                                            <a className={`nav-link ${element.isActive ? "nav-link-active" : ""}`} href={element.link} onClick={element.onClick}>{element.displayName}</a> :
+                                            <Link className={`nav-link ${element.isActive ? "nav-link-active" : ""}`} to={element.link} onClick={element.onClick}>{element.displayName}</Link>
                                     }
 
                                 </li>
