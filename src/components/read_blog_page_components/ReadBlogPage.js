@@ -4,6 +4,7 @@ import { useParams, Redirect } from "react-router-dom";
 import Header from "../common_components/Header";
 import Footer from "../common_components/Footer";
 import placeholder from "../../react-assets/profile-placeholder.png"
+import Loader from "../common_components/Loader";
 
 function ReadBlogPage() {
 
@@ -22,10 +23,14 @@ function ReadBlogPage() {
         contentArray: []
     });
     const [redirectToHome, setRedirectToHome] = useState(false);
+    const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
         getBlogData(blogHeading).then(data => {
             setBlog(data);
+            setTimeout(() => {
+                setIsLoading(false);
+            }, 100);
         }).catch((err) => { console.log(err); });
     }, []);
 
@@ -45,7 +50,7 @@ function ReadBlogPage() {
     }
 
     if (!redirectToHome) {
-        return <div>
+        return isLoading ? <Loader /> : <div>
             <Header headerLinks={headerLinks} />
             <h1 className="side-space read-blog-heading">{blog.title}</h1>
             <div className="side-space row read-blog-author-date">
