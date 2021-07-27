@@ -8,12 +8,6 @@ import Loader from "../common_components/Loader";
 
 function ReadBlogPage() {
 
-    let headerLinks = [
-        { displayName: "Write A Blog", link: "/write_blog", isActive: true },
-        // { displayName: "Login/Register", link: "/", isActive: false },
-        // { displayName: "About Me", link: "#footer", isActive: false }
-    ]
-
     let blogHeading = useParams().blogHeading;
 
     const [blog, setBlog] = useState({
@@ -51,7 +45,7 @@ function ReadBlogPage() {
 
     if (!redirectToHome) {
         return isLoading ? <Loader /> : <div>
-            <Header headerLinks={headerLinks} />
+            <Header displayName="Write a Blog" link="/write_blog" onClick={() => { }} />
             <h1 className="side-space read-blog-heading">{blog.title}</h1>
             <div className="side-space row read-blog-author-date">
                 <div className="mx-auto row">
@@ -71,9 +65,9 @@ function ReadBlogPage() {
                         if (element.type === "heading") {
                             return <h2 key={index} className="side-space read-blog-subheading">{element.content}</h2>
                         } else {
-                            return <div className="row">
+                            return <div className="row" key={index} >
                                 <div className="mx-auto">
-                                    <img key={index} className="side-space read-blog-img" src={element.content} alt="blog" />
+                                    <img className="side-space read-blog-img" src={element.content} alt="blog" />
                                 </div>
                             </div>
                         }

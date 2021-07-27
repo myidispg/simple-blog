@@ -40,6 +40,8 @@ app.get('/api/blog/:heading', (req, res) => {
 app.post('/api/blog/new', (req, res) => {
     let blog = req.body;
     allBlogsData.allBlogsData.push(blog);
+
+    // console.log(blog);
     res.status(201).send({message: "blog created"});
 });
 

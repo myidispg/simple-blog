@@ -9,7 +9,6 @@ function Header(props) {
         setNavOpen(prevValue => { return !prevValue });
     }
 
-
     return <section id="navbar" style={{ backgroundColor: isNavOpen ? "white" : "transparent" }}>
         <div className="container-fluid navbar-container">
             <nav className="navbar navbar-expand-lg navbar-light">
@@ -21,17 +20,11 @@ function Header(props) {
                 </button>
                 <div className="collapse navbar-collapse" id="navBarToggleContent">
                     <ul className="navbar-nav ml-auto">
-                        {
-                            props.headerLinks.map((element, index) => {
-                                return <li key={index} className="nav-item">
-                                    {
-                                        element.link[0] === "#" ?
-                                            <a className={`nav-link ${element.isActive ? "nav-link-active" : ""}`} href={element.link} onClick={element.onClick}>{element.displayName}</a> :
-                                            <Link className={`nav-link ${element.isActive ? "nav-link-active" : ""}`} to={element.link} onClick={element.onClick}>{element.displayName}</Link>
-                                    }
-
-                                </li>
-                            })
+                        {   
+                            props.link[0] === "#" ?
+                            <a className={`nav-link nav-link-active`} href={props.link} onClick={props.onClick}>{props.displayName}</a> :
+                            <Link className={`nav-link nav-link-active`} to={props.link} onClick={props.onClick}>{props.displayName}</Link>
+                            
                         }
                     </ul>
                 </div>

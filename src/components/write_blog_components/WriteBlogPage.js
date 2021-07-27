@@ -32,17 +32,12 @@ function WriteBlogPage() {
     });
 
     const [redirectToHome, setRedirectToHome] = useState(false);
-    const [headerLinks, setHeaderLinks] = useState(
-        [
-            { displayName: "Publish", link: "/write_blog", isActive: true, onClick: publishButtonOnClick },
-            // { displayName: "Login/Register", link: "/", isActive: false },
-            // { displayName: "About Me", link: "#footer", isActive: false }
-        ]
-    );
+    const [error, setError] = useState({
+        message: "",
+        showError: false
+    });
 
     useEffect(() => {
-
-        console.log(`Redirect to home: ${redirectToHome}`);
 
         if (!redirectToHome) {
             setHeight(document.getElementById("blog-title"));
@@ -60,42 +55,56 @@ function WriteBlogPage() {
     })
 
     function publishButtonOnClick(event) {
-        console.log(event);
-        setHeaderLinks([
-            { displayName: "Saving", link: "", isActive: true, onClick: () => { } },
-        ]);
+
         postBlogToAPI().then((data) => {
             console.log("Successfully posted blog to API");
+            // Revert header back to normal just in case.
+            // Go back to home
             setRedirectToHome(true);
         }).catch((error) => {
-            console.log("Error posting blog to API");
-            console.log(error);
-            setHeaderLinks([
-                { displayName: "Error while saving the blog.", link: "", isActive: true, onClick: () => { } },
-            ]);
-            // Set to normal after 2 seconds
-            setTimeout(() => {
-                setHeaderLinks([
-                    { displayName: "Publish", link: "write_blog", isActive: true, onClick: publishButtonOnClick },
-                ]);
-            }, 2000);
-
+            if (error.message === "Tried to post empty blog") {
+                console.log("Empty blog");
+                showErrorMessageInHeader("Please enter a title and content for the blog", 5000);
+            } else {
+                console.log("Error posting blog to API");
+                showErrorMessageInHeader("Error while saving the blog.", 5000);
+            }
         });
     }
 
     async function postBlogToAPI() {
-        let response = await fetch('/api/blog/new', {
-            method: "POST",
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(blogContent)
-        });
-        const body = await response.json();
-        console.log(response);
-        if (response.status === 201) {
-            return body;
+        console.log(JSON.stringify(blogContent));
+        if (blogContent.contentArray[0] === "" || blogContent.title === "") {
+            throw new Error("Tried to post empty blog");
         } else {
-            throw new Error(body.message);
+            let response = await fetch('/api/blog/new', {
+                method: "POST",
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify(blogContent)
+            });
+            const body = await response.json();
+            if (response.status === 201) {
+                return body;
+            } else {
+                throw new Error(body.message);
+            }
         }
+    }
+
+    function showErrorMessageInHeader(errorMessage, timeOut) {
+        // Show a message in the header
+        setError({
+            message: errorMessage,
+            showError: true
+        });
+        // Set to normal after 2 seconds
+        setTimeout(() => {
+            // Hide the header message
+            setError({
+                message: "",
+                showError: false
+            });
+        }, timeOut);
     }
 
     function setHeight(domElement) {
@@ -121,20 +130,26 @@ function WriteBlogPage() {
             let indexOfContent = targetName.split("-")[3];
 
             setBlogContent(prevValue => {
-                prevValue.contentArray[indexOfContent] = targetValue
+                let newContentArray = prevValue.contentArray;
+                newContentArray[indexOfContent] = targetValue;
                 return {
                     ...prevValue,
+                    contentArray: newContentArray,
                 }
             })
+
         } else if (targetName.includes("blog-content-heading")) {
             let indexOfContent = targetName.split("-")[3];
             setBlogContent(prevValue => {
-                prevValue.contentArray[indexOfContent].content = targetValue;
+                let newContentArray = prevValue.contentArray;
+                newContentArray[indexOfContent].content = targetValue;
                 return {
                     ...prevValue,
+                    contentArray: newContentArray,
                 }
             })
         }
+        // console.log(blogContent);
     }
 
     function handleKeyPress(event) {
@@ -144,7 +159,6 @@ function WriteBlogPage() {
             if (event.shiftKey && event.key === "Enter") {
                 event.preventDefault();
             }
-            console.log("Empty blog");
             return;
         } else {
             // Blog has some content. So, just find out in which para was the keys pressed and add a new para after it.
@@ -174,7 +188,6 @@ function WriteBlogPage() {
                         ...blogContent,
                         contentArray: newArray
                     })
-
                 }
                 return;
             }
@@ -277,9 +290,11 @@ function WriteBlogPage() {
             addImageButtonDom[0].style.visibility = "hidden"
         }
     }
-
     return redirectToHome ? <Redirect to="/" /> : <div>
-        <Header headerLinks={headerLinks} />
+        {error.showError ? <div style={{ backgroundColor: "#BF0000", color: "white", padding: "2px 0px"}} className="row">
+            <span className="mx-auto">{error.message}</span>
+        </div> : null}
+        <Header displayName="Publish" link="/write_blog" onClick={publishButtonOnClick} />
         {/* <p>{apiMessage}</p> */}
         <div className="container-fluid">
             <form>

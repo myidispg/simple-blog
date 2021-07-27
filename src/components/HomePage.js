@@ -16,12 +16,6 @@ var _ = require('lodash');
 
 function HomePage() {
 
-    let headerLinks = [
-        { displayName: "Write A Blog", link: "/write_blog", isActive: true },
-        // { displayName: "Login/Register", link: "/", isActive: false },
-        // { displayName: "About Me", link: "#footer", isActive: false }
-    ]
-
     const [allBlogsData, setAllBlogs] = useState(["", ""]);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -53,7 +47,7 @@ function HomePage() {
     let otherBlogs = allBlogsData.filter((value, index) => index !== 0);
 
     return isLoading ? <Loader /> : <div>
-        <Header headerLinks={headerLinks} />
+        <Header displayName="Write a Blog" link="/write_blog" onClick={() => { }} />
         <TheBlogHeading />
         <Link to={`/read_blog/${_.kebabCase(mainBlog.title)}`} style={{ textDecoration: "none", color: "black" }}>
             <MainBlog imgSrc={getPlaceHolderImage(mainBlog)} date={mainBlog.date} title={mainBlog.title} content={getSmallDescription(allBlogsData[0])} />
