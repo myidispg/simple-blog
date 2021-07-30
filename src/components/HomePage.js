@@ -11,6 +11,7 @@ import LoadMoreButton from "./home_page_components/LoadMoreButton";
 // import allBlogsData from "../all_blogs";
 import { getSmallDescription, getPlaceHolderImage } from "../utilities";
 import Loader from "./common_components/Loader";
+import NoBlogsError from "./common_components/NoBlogsError";
 
 var _ = require('lodash');
 
@@ -20,6 +21,8 @@ function HomePage() {
     const [showLoadMore, setShowLoadMore] = useState(false);
     const [isLoading, setIsLoading] = useState(true);
 
+    const [noBlogs, setNoBlogs] = useState(false);
+
     const [requiredPageNumber, setRequiredPageNumber] = useState(1);
     const [isFirstPageLoaded, setIsFirstPageLoaded] = useState(false);
 
@@ -28,7 +31,8 @@ function HomePage() {
         console.log("Use effect on page load only");
         // Get the main blog and upto 12 blogs of page 1.
         getMainBlog().then(mainBlogResult => {
-            if (mainBlogResult !== null) {
+            console.log(mainBlogResult);
+            if (mainBlogResult !== null && mainBlogResult.mainBlog !== undefined) {
                 setAllBlogs([mainBlogResult.mainBlog]);
                 setTimeout(() => {
                     setIsLoading(false);
@@ -52,6 +56,8 @@ function HomePage() {
 
             } else {
                 // TODO: Show an error page stating there are no blogs to show.
+                setNoBlogs(true);
+                setIsLoading(false);
             }
             setIsFirstPageLoaded(true);
 
@@ -117,16 +123,30 @@ function HomePage() {
     let mainBlog = allBlogsData[0];
     let otherBlogs = allBlogsData.filter((value, index) => index !== 0);
 
-    return isLoading ? <Loader /> : <div>
-        <Header displayName="Write a Blog" link="/write_blog" onClick={() => { }} />
-        <TheBlogHeading />
-        <Link to={`/read_blog/${_.kebabCase(mainBlog.title)}`} style={{ textDecoration: "none", color: "black" }}>
-            <MainBlog imgSrc={getPlaceHolderImage(mainBlog)} date={mainBlog.date} title={mainBlog.title} content={getSmallDescription(allBlogsData[0])} />
-        </Link>
-        <AllBlogs blogs={otherBlogs} />
-        {showLoadMore ? <LoadMoreButton onClick={getMoreBlogs} /> : null}
-        <Footer />
-    </div>;
+    let returnComponent = <Loader />;
+
+    if (!isLoading) {
+        if (noBlogs) {
+            returnComponent = <div>
+                <Header displayName="Write a Blog" link="/write_blog" onClick={() => { }} />
+                <NoBlogsError />
+                <Footer />
+            </div>
+        } else {
+            returnComponent = <div>
+                <Header displayName="Write a Blog" link="/write_blog" onClick={() => { }} />
+                <TheBlogHeading />
+                <Link to={`/read_blog/${_.kebabCase(mainBlog.title)}`} style={{ textDecoration: "none", color: "black" }}>
+                    <MainBlog imgSrc={getPlaceHolderImage(mainBlog)} date={mainBlog.date} title={mainBlog.title} content={getSmallDescription(allBlogsData[0])} />
+                </Link>
+                <AllBlogs blogs={otherBlogs} />
+                {showLoadMore ? <LoadMoreButton onClick={getMoreBlogs} /> : null}
+                <Footer />
+            </div>;
+        }
+    }
+
+    return returnComponent;
 }
 
 export default HomePage;
