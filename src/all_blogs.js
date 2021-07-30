@@ -1,14 +1,14 @@
 var allBlogsData = [];
 
 
-for (var i = 1; i < 14; i++) {
+for (var i = 1; i <= 20; i++) {
 
     var title = "";
 
     if (i === 1) {
-        title += "Beginners know something experts don't"
+        title += `${i} - Beginners know something experts don't`
     } else {
-        title += `Lorem Ipsum is simply dummy text of the printing and typesetting industry. ${i}`
+        title += `${i} - Lorem Ipsum is simply dummy text of the printing and typesetting industry.`
     }
 
     allBlogsData.push(i % 2 === 0 ? {

@@ -1,8 +1,12 @@
 import React from "react";
 
-function LoadMoreButton() {
+function LoadMoreButton(props) {
     return (<section id="load-more">
-        <p id="load-more">Load More</p>
+        <div className="container-fluid">
+            <div className="row mx-auto">
+                <button id="load-more-button" onClick={props.onClick}>Load More</button>
+            </div>
+        </div>
     </section>);
 }
 
