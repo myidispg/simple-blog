@@ -42,10 +42,14 @@ function HomePage() {
                 getBlogsByPageNumber(requiredPageNumber).then(blogsByPageResult => {
                     if (blogsByPageResult !== null) {
                         console.log(`Got blogs for page number: ${requiredPageNumber}. Blogs received: ${blogsByPageResult.blogs.length}`);
-                        // setAllBlogs(allBlogsData.concat(blogsByPageResult.blogs));
+                        
+                        console.log(`Page 1 Blogs: ${blogsByPageResult.blogs}`)
+                        blogsByPageResult.blogs.forEach(blog => {
+                            console.log(blog._id);
+                        });
+                        
                         setAllBlogs(prevValue => {
                             let newArray = prevValue.concat(blogsByPageResult.blogs);
-                            console.log(newArray.length);
                             return newArray;
                         });
                         setShowLoadMore(!blogsByPageResult.isLastPage);
@@ -55,7 +59,6 @@ function HomePage() {
                 });
 
             } else {
-                // TODO: Show an error page stating there are no blogs to show.
                 setNoBlogs(true);
                 setIsLoading(false);
             }
