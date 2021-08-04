@@ -21,7 +21,7 @@ function ReadBlogPage() {
 
     useEffect(() => {
         getBlogData(blogHeading).then(data => {
-            setBlog(data);
+            setBlog(data.blog);
             setTimeout(() => {
                 setIsLoading(false);
             }, 100);
@@ -36,8 +36,10 @@ function ReadBlogPage() {
             }
         });
         const body = await response.json();
+        console.log(response.status);
         if (response.status !== 200) {
             setRedirectToHome(true);
+            setIsLoading(false);
         } else {
             return body;
         }
@@ -77,6 +79,7 @@ function ReadBlogPage() {
             <Footer />
         </div>;
     } else {
+        console.log("Redirecting to home");
         return <Redirect to="/" />; // TODO: Redirect to the error page. 
     }
 }

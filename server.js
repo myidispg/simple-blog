@@ -6,7 +6,6 @@ const mongoose = require("mongoose");
 
 const app = express();
 
-var _ = require('lodash');
 
 app.set('view engine', 'ejs');
 
@@ -102,26 +101,26 @@ app.get("/api/blog/getBlogs/page/:pageNumber", (req, res) => {
 
 });
 
-app.get('/api/blog/all', (req, res) => {
-    console.log(Blog.count({}));
-    let hasMoreBlogs = allBlogsData.allBlogsData.length > 13;
-    res.send({
-        hasMoreBlogs: hasMoreBlogs,
-        blogsList: allBlogsData.allBlogsData
-    });
+app.get('/api/blog/:id', (req, res) => {
+    let blogId = req.params.id;
+
+    if (blogId === "undefined") {
+        res.sendStatus(404);
+    } else {
+        console.log(`Client needs to read a blog with ID: ${blogId}`);
+        Blog.findById(blogId, function (err, blog) {
+            if (err) {
+                console.log(err);
+                res.sendStatus(404);
+            } else {
+                res.send({
+                    blog: blog
+                });
+            }
+        });
+    }
 });
 
-app.get('/api/blog/:heading', (req, res) => {
-    let headingKebab = req.params.heading;
-    let blog = undefined;
-    for (var i = 0; i < allBlogsData.allBlogsData.length; i++) {
-        if (headingKebab === _.kebabCase(allBlogsData.allBlogsData[i].title)) {
-            blog = allBlogsData.allBlogsData[i];
-            break;
-        }
-    }
-    blog !== undefined ? res.send(blog) : res.sendStatus(404);
-});
 
 app.post('/api/blog/new', (req, res) => {
     let blog = req.body;
@@ -142,11 +141,6 @@ app.post('/api/blog/new', (req, res) => {
             res.status(201).send({ message: "blog created" });
         }
     });
-
-    // allBlogsData.allBlogsData.unshift(blog);
-
-    // console.log(blog);
-    // res.status(201).send({ message: "blog created" });
 });
 
 app.get('/api/express_backend', (req, res) => {

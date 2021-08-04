@@ -10,7 +10,7 @@ function AllBlogs(props) {
             <div className="row">
                 {props.blogs.map((blog, index) => {
                     return (
-                        <SingleBlog key={index} imgSrc={getPlaceHolderImage(blog)} title={blog.title} content={getSmallDescription(blog)} date={blog.date} />
+                        <SingleBlog key={index} id={blog._id} imgSrc={getPlaceHolderImage(blog)} title={blog.title} content={getSmallDescription(blog)} date={blog.date} />
                     )
                 })}
             </div>
