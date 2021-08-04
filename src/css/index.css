@@ -333,7 +333,7 @@ body {
 
 .blog-page-author-date {
     padding: auto;
-    margin-bottom: 30px;
+    margin-bottom: 1%;
 }
 
 @media screen and (max-width: 900px) {
@@ -363,7 +363,7 @@ body {
 .author-image {
     border-radius: 50%;
     height: 70px;
-    border: 2px solid rgb(0, 0, 0, 0.4);
+    border: 2px solid rgb(231, 22, 93);
 }
 
 .author-date-column {

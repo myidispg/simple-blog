@@ -49,7 +49,7 @@ function ReadBlogPage() {
         return isLoading ? <Loader /> : <div>
             <Header displayName="Write a Blog" link="/write_blog" onClick={() => { }} />
             <h1 className="side-space read-blog-heading">{blog.title}</h1>
-            <div className="side-space row read-blog-author-date">
+            <div className="side-space row blog-page-author-date">
                 <div className="mx-auto row">
                     <img src={placeholder} alt="icon of guy working on laptop" className="author-image" />
                     <div className="author-date-column">

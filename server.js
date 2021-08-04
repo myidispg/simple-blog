@@ -35,9 +35,7 @@ const Blog = mongoose.model("blog", postSchema);
 
 // -------MONOGO DB Stuff OVER -------------
 
-const allBlogsData = require("./src/all_blogs")
-
-const blogPageSize = 12;
+const blogPageSize = 6;
 
 app.listen(port, () => { console.log(`Listening on port ${port}`); });
 

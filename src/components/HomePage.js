@@ -42,11 +42,6 @@ function HomePage() {
                     if (blogsByPageResult !== null) {
                         console.log(`Got blogs for page number: ${requiredPageNumber}. Blogs received: ${blogsByPageResult.blogs.length}`);
                         
-                        console.log(`Page 1 Blogs: ${blogsByPageResult.blogs}`)
-                        blogsByPageResult.blogs.forEach(blog => {
-                            console.log(blog._id);
-                        });
-                        
                         setAllBlogs(prevValue => {
                             let newArray = prevValue.concat(blogsByPageResult.blogs);
                             return newArray;
