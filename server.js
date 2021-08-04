@@ -18,8 +18,9 @@ app.use(express.static("public"));
 const port = process.env.PORT || 5000;
 
 // ------MONGO DB Stuff --------------
-const localUri = "mongodb://localhost:27017/blogDB";
-mongoose.connect(localUri, { useNewUrlParser: true, useUnifiedTopology: true });
+// const localUri = "mongodb://localhost:27017/blogDB";
+const databaseUri = "mongodb+srv://admin:12pass1234@cluster0.t4cyx.mongodb.net/blogDB?retryWrites=true&w=majority"
+mongoose.connect(databaseUri, { useNewUrlParser: true, useUnifiedTopology: true });
 
 const postSchema = new mongoose.Schema({
     date: { type: Date, default: Date.now },
