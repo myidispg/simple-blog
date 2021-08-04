@@ -8,6 +8,7 @@ import { Redirect } from "react-router-dom";
 function WriteBlogPage() {
 
     let today = new Date();
+    console.log(today.toISOString());
 
     // blogContent will be an array that will store the whole blog in the schema defined in all_blogs.js
     const [blogContent, setBlogContent] = useState({
@@ -80,7 +81,12 @@ function WriteBlogPage() {
             let response = await fetch('/api/blog/new', {
                 method: "POST",
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(blogContent)
+                body: JSON.stringify({
+                    title: blogContent.title,
+                    contentArray: blogContent.contentArray,
+                    date: today.toISOString(),
+                    author: blogContent.author
+                })
             });
             const body = await response.json();
             if (response.status === 201) {

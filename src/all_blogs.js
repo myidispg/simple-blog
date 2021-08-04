@@ -1,7 +1,7 @@
 var allBlogsData = [];
 
 
-for (var i = 1; i <= 25; i++) {
+for (var i = 1; i <= 0; i++) {
 
     var title = "";
 
