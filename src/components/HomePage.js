@@ -13,7 +13,6 @@ import { getSmallDescription, getPlaceHolderImage } from "../utilities";
 import Loader from "./common_components/Loader";
 import NoBlogsError from "./common_components/NoBlogsError";
 
-var _ = require('lodash');
 
 function HomePage() {
 
@@ -139,7 +138,7 @@ function HomePage() {
             returnComponent = <div>
                 <Header displayName="Write a Blog" link="/write_blog" onClick={() => { }} />
                 <TheBlogHeading />
-                <Link to={`/read_blog/${_.kebabCase(mainBlog.title)}`} style={{ textDecoration: "none", color: "black" }}>
+                <Link to={`/read_blog/${mainBlog._id}`} style={{ textDecoration: "none", color: "black" }}>
                     <MainBlog imgSrc={getPlaceHolderImage(mainBlog)} date={mainBlog.date} title={mainBlog.title} content={getSmallDescription(allBlogsData[0])} />
                 </Link>
                 <AllBlogs blogs={otherBlogs} />

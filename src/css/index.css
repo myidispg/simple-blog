@@ -81,6 +81,7 @@ body {
 }
 
 /* The Loading Screen */
+
 .loader {
     border: 8px solid #f3f3f3;
     border-top: 8px solid #3498db;
@@ -89,12 +90,16 @@ body {
     height: 5vw;
     animation: spin 2s linear infinite;
     margin: 45vh auto;
-  }
-  
-  @keyframes spin {
-    0%  { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }
-  }
+}
+
+@keyframes spin {
+    0% {
+        transform: rotate(0deg);
+    }
+    100% {
+        transform: rotate(360deg);
+    }
+}
 
 /* The Blog Heading */
 
@@ -365,6 +370,11 @@ body {
     margin: auto 10px;
 }
 
+.author-name {
+    margin-bottom: 0.1rem;
+    margin-top: 0.6rem;
+}
+
 .author-date {
     text-transform: uppercase;
     color: rgb(0, 0, 0, 0.4);
@@ -387,7 +397,6 @@ body {
 
 .read-blog-subheading {
     padding-bottom: 1%;
-    padding-top: 2%;
     font-size: 2.2rem;
 }
 
@@ -397,7 +406,7 @@ body {
     height: auto;
     min-height: 30vh;
     max-height: 70vh;
-    margin: auto;
+    margin: 3% auto;
     margin-bottom: 3%;
     object-fit: cover;
 }
@@ -443,6 +452,18 @@ body {
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
     box-shadow: none;
+}
+
+.author-textinput {
+    overflow: hidden;
+    resize: none;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
+    box-shadow: none;
+    padding: 0;
 }
 
 .blog-page-author-date {
@@ -553,6 +574,7 @@ body {
     fill: grey;
     opacity: 0.7;
 }
+
 .remove-image-icon:hover {
     fill: black;
     opacity: 0.7;

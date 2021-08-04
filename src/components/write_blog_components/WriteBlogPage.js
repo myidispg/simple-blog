@@ -13,7 +13,7 @@ function WriteBlogPage() {
     // blogContent will be an array that will store the whole blog in the schema defined in all_blogs.js
     const [blogContent, setBlogContent] = useState({
         date: `${today.toLocaleString('default', { month: "long" })} ${today.getDate()}, ${today.getFullYear()}`,
-        author: "Prashant Goyal",
+        author: "",
         title: "",
         contentArray: [""],
         // contentArray: ["Hello", "", "Hello"],
@@ -65,7 +65,7 @@ function WriteBlogPage() {
         }).catch((error) => {
             if (error.message === "Tried to post empty blog") {
                 console.log("Empty blog");
-                showErrorMessageInHeader("Please enter a title and content for the blog", 5000);
+                showErrorMessageInHeader("Please enter title, content and author name for the blog", 5000);
             } else {
                 console.log("Error posting blog to API");
                 showErrorMessageInHeader("Error while saving the blog.", 5000);
@@ -75,7 +75,7 @@ function WriteBlogPage() {
 
     async function postBlogToAPI() {
         console.log(JSON.stringify(blogContent));
-        if (blogContent.contentArray[0] === "" || blogContent.title === "") {
+        if (blogContent.contentArray[0] === "" || blogContent.title === "" || blogContent.author === "") {
             throw new Error("Tried to post empty blog");
         } else {
             let response = await fetch('/api/blog/new', {
@@ -154,8 +154,15 @@ function WriteBlogPage() {
                     contentArray: newContentArray,
                 }
             })
+        } else if (targetName.includes("blog-author")) {
+            setBlogContent(prevValue => {
+                return {
+                    ...prevValue,
+                    author: targetValue,
+                }
+            });
         }
-        // console.log(blogContent);
+        console.log(blogContent);
     }
 
     function handleKeyPress(event) {
@@ -297,7 +304,7 @@ function WriteBlogPage() {
         }
     }
     return redirectToHome ? <Redirect to="/" /> : <div>
-        {error.showError ? <div style={{ backgroundColor: "#BF0000", color: "white", padding: "2px 0px"}} className="row">
+        {error.showError ? <div style={{ backgroundColor: "#BF0000", color: "white", padding: "2px 0px" }} className="row">
             <span className="mx-auto">{error.message}</span>
         </div> : null}
         <Header displayName="Publish" link="/write_blog" onClick={publishButtonOnClick} />
@@ -312,7 +319,7 @@ function WriteBlogPage() {
                     <div className="mx-auto row">
                         <img src={placeholder} alt="icon of guy working on laptop" className="author-image" />
                         <div className="author-date-column">
-                            <p className="author-name">by {blogContent.author}</p>
+                            <p className="author-name">by <input type="name" value={blogContent.author} placeholder="Creative Ape" name="blog-author" className="author-textinput" onInput={handleInput} /></p>
                             <p className="author-date">Published on: {blogContent.date}</p>
                         </div>
                     </div>
