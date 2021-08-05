@@ -484,8 +484,8 @@ body {
     opacity: 60%;
 }
 
-.write-blog-content-row{
-    /* padding: 0; */
+.write-blog-main-editor {
+    width: 85%;
 }
 
 .write-blog-paragraph {
@@ -503,6 +503,10 @@ body {
 }
 
 @media screen and (max-width: 900px) {
+    .write-blog-main-editor {
+        width: 95%;
+    }
+
     .write-blog-heading {
         font-size: 3rem;
         margin-bottom: 20px;
@@ -550,6 +554,7 @@ body {
     fill: grey;
     opacity: 0.7;
     margin: 2px;
+
 }
 
 .add-content-icon:hover {
@@ -566,9 +571,35 @@ body {
 }
 
 .add-heading-image-icons-container {
-    vertical-align: bottom;
-    padding-bottom: 0.8%;
-    margin-right: 2%;
+    vertical-align: top;
+    padding-top: 0.5%;
+    margin-right: 1%;
+}
+
+.add-heading-image-icons-row{
+    margin-right: 2px;
+}
+
+@media screen and (max-width: 900px) {
+    .add-heading-image-icons-container {
+        padding-top: 0.8%;
+    }
+    .add-heading-image-icons-row{
+        margin-right: 1px;
+    }
+}
+
+@media screen and (max-width: 700px) {
+    .add-content-icon {
+        width: 15px;
+        height: 15px;
+    }
+    .add-heading-image-icons-container {
+        padding-top: 1%;
+    }
+    .add-heading-image-icons-row{
+        margin-right: 0px;
+    }
 }
 
 .remove-image-icon {
