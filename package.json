@@ -22,13 +22,14 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "react-scripts start",
+    "server": "node server.js",
     "build": "cross-env NODE_ENV=production react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
-    "heroku-postbuild": "npm install && npm run build"
+    "heroku-postbuild": "npm install && npm run build && npm server"
   },
   "eslintConfig": {
     "extends": [
