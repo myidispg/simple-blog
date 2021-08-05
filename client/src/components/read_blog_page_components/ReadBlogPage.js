@@ -9,7 +9,7 @@ import Loader from "../common_components/Loader";
 function ReadBlogPage() {
 
     console.log(useParams());
-    let blogHeading = useParams().blogHeading;
+    let blogId = useParams().blogId;
 
     const [blog, setBlog] = useState({
         date: "",
@@ -21,7 +21,7 @@ function ReadBlogPage() {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        getBlogData(blogHeading).then(data => {
+        getBlogData(blogId).then(data => {
             setBlog(data.blog);
             setTimeout(() => {
                 setIsLoading(false);
