@@ -1,5 +1,3 @@
-// import allBlogsData from "./src/all_blogs";
-
 const express = require('express');
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
