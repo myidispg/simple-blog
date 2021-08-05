@@ -1,5 +1,5 @@
 {
-  "name": "BlogPoint",
+  "name": "blogpoint",
   "version": "1.0.0",
   "private": true,
   "dependencies": {
@@ -21,7 +21,7 @@
     "web-vitals": "^1.1.2"
   },
   "scripts": {
-    "start": "cross-env NODE_ENV=development react-scripts start",
+    "start": "cross-env NODE_ENV=development react-scripts start && npm run server",
     "server": "nodemon server.js",
     "build": "cross-env NODE_ENV=production react-scripts build",
     "test": "react-scripts test",
