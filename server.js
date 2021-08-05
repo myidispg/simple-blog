@@ -148,11 +148,11 @@ app.get('/api/express_backend', (req, res) => {
 
 if (process.env.NODE_ENV === "production") {
     // Express will serve up production assets
-    app.use(express.static("build"));
+    app.use(express.static(path.join(__dirname, "build")));
   
     // Express will serve up the front-end index.html file if it doesn't recognize the route
     app.get("*", (req, res) =>
-      res.sendFile(path.resolve("build", "index.html"))
+      res.sendFile(path.join(__dirname, "build", "index.html"))
     );
   }
 
