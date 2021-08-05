@@ -14,7 +14,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json({ limit: '50mb' }));
 // parse application/json
 app.use(bodyParser.json())
-app.use(express.static("public"));
+app.use(express.static(path.join(__dirname, './client/build')))
 
 // ------MONGO DB Stuff --------------
 // const localUri = "mongodb://localhost:27017/blogDB";
