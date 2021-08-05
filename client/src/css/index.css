@@ -134,7 +134,7 @@ body {
 }
 
 .large-blog-content>h6 {
-    opacity: 50%;
+    opacity: 0.5;
 }
 
 .large-blog-content>h2 {
@@ -142,7 +142,7 @@ body {
 }
 
 .large-blog-content>p {
-    opacity: 60%;
+    opacity: 0.6;
     margin: 1rem 0;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -186,7 +186,7 @@ body {
 
 .small-blog-date {
     font-size: 0.8rem;
-    opacity: 50%;
+    opacity: 0.5;
     margin: 20px 10px 0px 10px;
 }
 
@@ -204,7 +204,7 @@ body {
 .small-blog-content {
     margin: 0px 10px 16px 10px;
     font-size: 14px;
-    opacity: 60%;
+    opacity: 0.6;
     overflow: hidden;
     text-overflow: ellipsis;
     display: -webkit-box;
