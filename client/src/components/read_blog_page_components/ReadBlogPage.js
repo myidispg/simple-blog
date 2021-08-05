@@ -8,6 +8,7 @@ import Loader from "../common_components/Loader";
 
 function ReadBlogPage() {
 
+    console.log(useParams());
     let blogHeading = useParams().blogHeading;
 
     const [blog, setBlog] = useState({
