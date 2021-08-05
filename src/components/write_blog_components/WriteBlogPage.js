@@ -306,7 +306,7 @@ function WriteBlogPage() {
                 </div>
                 <hr className="side-space read-blog-divider" />
                 {/* The blog content */}
-                <div className="row mx-auto" style={{ width: "80%" }}>
+                <div className="row mx-auto" style={{ width: "85%" }}>
                     {
                         blogContent.contentArray.map((element, index) => {
                             let showButtons = false;
@@ -315,18 +315,21 @@ function WriteBlogPage() {
                                 if (element === "") {
                                     showButtons = true
                                 }
-                                htmlElement = <div key={index} className="col-12">
+                                htmlElement = <div key={index} className="col-12 write-blog-content-row">
                                     <div style={{ display: "inline-block" }} className="add-heading-image-icons-container">
-                                        <svg style={{ display: "block", visibility: showButtons ? "visible" : "hidden" }} onClick={addHeading} xmlns="http://www.w3.org/2000/svg" className="bi bi-fonts add-content-icon" name={`add-title-para-${index}`} viewBox="0 0 16 16">
-                                            <path name={`add-title-para-${index}`} d="M12.258 3h-8.51l-.083 2.46h.479c.26-1.544.758-1.783 2.693-1.845l.424-.013v7.827c0 .663-.144.82-1.3.923v.52h4.082v-.52c-1.162-.103-1.306-.26-1.306-.923V3.602l.431.013c1.934.062 2.434.301 2.693 1.846h.479L12.258 3z" />
-                                        </svg>
-                                        {/* This div will be hidden. When the user clicks the image svg, programmatically, click this image input  */}
-                                        <div style={{ height: "0px", overflow: "hidden" }}>
-                                            <input onChange={imageUploadChangeEventHandler} style={{ width: "0px" }} type={"file"} name={`add-image-hidden-para-${index}`} accept="image/*" />
+                                        <div class="row">
+                                            <svg style={{ display: "block", visibility: showButtons ? "visible" : "hidden" }} onClick={addHeading} xmlns="http://www.w3.org/2000/svg" className="bi bi-fonts add-content-icon" name={`add-title-para-${index}`} viewBox="0 0 16 16">
+                                                <path name={`add-title-para-${index}`} d="M12.258 3h-8.51l-.083 2.46h.479c.26-1.544.758-1.783 2.693-1.845l.424-.013v7.827c0 .663-.144.82-1.3.923v.52h4.082v-.52c-1.162-.103-1.306-.26-1.306-.923V3.602l.431.013c1.934.062 2.434.301 2.693 1.846h.479L12.258 3z" />
+                                            </svg>
+                                            {/* This div will be hidden. When the user clicks the image svg, programmatically, click this image input  */}
+                                            <div style={{ height: "0px", overflow: "hidden" }}>
+                                                <input onChange={imageUploadChangeEventHandler} style={{ width: "0px" }} type={"file"} name={`add-image-hidden-para-${index}`} accept="image/*" />
+                                            </div>
+                                            <svg style={{ visibility: showButtons ? "visible" : "hidden" }} onClick={uploadImageButtonClick} xmlns="http://www.w3.org/2000/svg" className="bi bi-image-fill add-content-icon" name={`add-image-para-${index}`} viewBox="0 0 16 16">
+                                                <path name={`add-image-para-${index}`} d="M.002 3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-12a2 2 0 0 1-2-2V3zm1 9v1a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12zm5-6.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0z" />
+                                            </svg>
+
                                         </div>
-                                        <svg style={{ visibility: showButtons ? "visible" : "hidden" }} onClick={uploadImageButtonClick} xmlns="http://www.w3.org/2000/svg" className="bi bi-image-fill add-content-icon" name={`add-image-para-${index}`} viewBox="0 0 16 16">
-                                            <path name={`add-image-para-${index}`} d="M.002 3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-12a2 2 0 0 1-2-2V3zm1 9v1a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12zm5-6.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0z" />
-                                        </svg>
                                     </div>
                                     <textarea rows="1" value={element} type="text" placeholder="New para here" id="blog-content-para" name={`blog-content-para-${index}`} className="mx-auto expanding-text-area write-blog-paragraph" onInput={handleInput} onKeyDown={handleKeyPress} onFocus={showTitleImageButtons} onBlur={hideTitleImageButtons} />
                                 </div>
@@ -340,16 +343,18 @@ function WriteBlogPage() {
                                 if (element.type === "heading") {
                                     htmlElement = <div key={index} className="col-12">
                                         <div style={{ display: "inline-block" }} className="add-heading-image-icons-container">
-                                            <svg style={{ display: "block", visibility: showButtons ? "visible" : "hidden" }} onClick={addHeading} xmlns="http://www.w3.org/2000/svg" className="bi bi-fonts add-content-icon" name={`add-title-para-${index}`} viewBox="0 0 16 16">
-                                                <path name={`add-title-para-${index}`} d="M12.258 3h-8.51l-.083 2.46h.479c.26-1.544.758-1.783 2.693-1.845l.424-.013v7.827c0 .663-.144.82-1.3.923v.52h4.082v-.52c-1.162-.103-1.306-.26-1.306-.923V3.602l.431.013c1.934.062 2.434.301 2.693 1.846h.479L12.258 3z" />
-                                            </svg>
-                                            {/* This div will be hidden. When the user clicks the image svg, programmatically, click this image input  */}
-                                            <div style={{ height: "0px", overflow: "hidden" }}>
-                                                <input onChange={imageUploadChangeEventHandler} style={{ width: "0px" }} type={"file"} name={`add-image-hidden-para-${index}`} accept="image/*" />
+                                            <div class="row">
+                                                <svg style={{ display: "block", visibility: showButtons ? "visible" : "hidden" }} onClick={addHeading} xmlns="http://www.w3.org/2000/svg" className="bi bi-fonts add-content-icon" name={`add-title-para-${index}`} viewBox="0 0 16 16">
+                                                    <path name={`add-title-para-${index}`} d="M12.258 3h-8.51l-.083 2.46h.479c.26-1.544.758-1.783 2.693-1.845l.424-.013v7.827c0 .663-.144.82-1.3.923v.52h4.082v-.52c-1.162-.103-1.306-.26-1.306-.923V3.602l.431.013c1.934.062 2.434.301 2.693 1.846h.479L12.258 3z" />
+                                                </svg>
+                                                {/* This div will be hidden. When the user clicks the image svg, programmatically, click this image input  */}
+                                                <div style={{ height: "0px", overflow: "hidden" }}>
+                                                    <input onChange={imageUploadChangeEventHandler} style={{ width: "0px" }} type={"file"} name={`add-image-hidden-para-${index}`} accept="image/*" />
+                                                </div>
+                                                <svg style={{ visibility: showButtons ? "visible" : "hidden" }} onClick={uploadImageButtonClick} xmlns="http://www.w3.org/2000/svg" className="bi bi-image-fill add-content-icon" name={`add-image-para-${index}`} viewBox="0 0 16 16">
+                                                    <path name={`add-image-para-${index}`} d="M.002 3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-12a2 2 0 0 1-2-2V3zm1 9v1a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12zm5-6.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0z" />
+                                                </svg>
                                             </div>
-                                            <svg style={{ visibility: showButtons ? "visible" : "hidden" }} onClick={uploadImageButtonClick} xmlns="http://www.w3.org/2000/svg" className="bi bi-image-fill add-content-icon" name={`add-image-para-${index}`} viewBox="0 0 16 16">
-                                                <path name={`add-image-para-${index}`} d="M.002 3a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2h-12a2 2 0 0 1-2-2V3zm1 9v1a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V9.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12zm5-6.5a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0z" />
-                                            </svg>
                                         </div>
                                         <textarea rows="1" value={element.content} type="text" placeholder="Type a subheading" id="blog-content-para" name={`blog-content-heading-${index}`} className="mx-auto expanding-text-area write-blog-subheading" onInput={handleInput} onKeyDown={handleKeyPress} onFocus={showTitleImageButtons} onBlur={hideTitleImageButtons} />
                                     </div>

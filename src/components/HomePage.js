@@ -30,7 +30,6 @@ function HomePage() {
         console.log("Use effect on page load only");
         // Get the main blog and upto 12 blogs of page 1.
         getMainBlog().then(mainBlogResult => {
-            console.log(mainBlogResult);
             if (mainBlogResult !== null && mainBlogResult.mainBlog !== undefined) {
                 setAllBlogs([mainBlogResult.mainBlog]);
                 setTimeout(() => {
@@ -41,7 +40,7 @@ function HomePage() {
                 getBlogsByPageNumber(requiredPageNumber).then(blogsByPageResult => {
                     if (blogsByPageResult !== null) {
                         console.log(`Got blogs for page number: ${requiredPageNumber}. Blogs received: ${blogsByPageResult.blogs.length}`);
-                        
+
                         setAllBlogs(prevValue => {
                             let newArray = prevValue.concat(blogsByPageResult.blogs);
                             return newArray;

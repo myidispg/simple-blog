@@ -3,8 +3,11 @@
 const express = require('express');
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
+const morgan = require("morgan");
+const path = require("path");
 
 const app = express();
+app.use(morgan("tiny"));
 
 
 app.set('view engine', 'ejs');
@@ -14,8 +17,6 @@ app.use(bodyParser.json({ limit: '50mb' }));
 // parse application/json
 app.use(bodyParser.json())
 app.use(express.static("public"));
-
-const port = process.env.PORT || 5000;
 
 // ------MONGO DB Stuff --------------
 // const localUri = "mongodb://localhost:27017/blogDB";
@@ -37,8 +38,6 @@ const Blog = mongoose.model("blog", postSchema);
 // -------MONOGO DB Stuff OVER -------------
 
 const blogPageSize = 6;
-
-app.listen(port, () => { console.log(`Listening on port ${port}`); });
 
 app.get("/api/blog/getBlogs/main", (req, res) => {
     // Return only the latest blog based on time of publication.
@@ -70,7 +69,7 @@ app.get("/api/blog/getBlogs/page/:pageNumber", (req, res) => {
     let isLastPage = false;
     let totalBlogsCount = 0;
 
-    Blog.count(function (err, count) {
+    Blog.countDocuments(function (err, count) {
         console.log(`There are a total of ${count} blogs`);
         totalBlogsCount = count;
     }).then(() => {
@@ -145,4 +144,20 @@ app.post('/api/blog/new', (req, res) => {
 app.get('/api/express_backend', (req, res) => {
     console.log(`Got a hit. Req: ${req}`);
     res.send({ message: "Welcome to express" });
+});
+
+if (process.env.NODE_ENV === "production") {
+    // Express will serve up production assets
+    app.use(express.static("build"));
+  
+    // Express will serve up the front-end index.html file if it doesn't recognize the route
+    app.get("*", (req, res) =>
+      res.sendFile(path.resolve("build", "index.html"))
+    );
+  }
+
+const port = process.env.PORT || 5000;
+
+app.listen(port, () => {
+    console.log(`Listening on port ${port}`);
 });
